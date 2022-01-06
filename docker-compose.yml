@@ -1,0 +1,18 @@
+version: '3'
+services:
+        python3:
+                build: .
+                container_name: 'rl_tmp'
+                working_dir: '/app'
+                tty: true
+                environment:
+                        - DISPLAY=$DISPLAY
+                        - NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
+                volumes:
+                        - ./src:/app/src
+                        - /tmp/.X11-unix:/tmp/.X11-unix
+                deploy:
+                        resources:
+                                reservations:
+                                        devices:
+                                                - capabilities: [gpu]
